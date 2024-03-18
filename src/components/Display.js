@@ -1,21 +1,22 @@
 import React from "react";
+import WeatherCard from "./WeatherCard";
 
 const Display = ({ live }) => {
   return (
     <>
-      {/* Displaying the timezone */}
+      {/* Current Location */}
       <h1 className="text-4xl font-bold ml-8 md:ml-12 mt-16 md:mt-20">{live?.timezone}</h1>
-
-      {/* Displaying current temperature */}
-      <h1 className="md:text-4xl text-2xl font-bold ml-[302px] bottom-9 md:bottom-[43px] md:ml-96 relative">
+      
+      {/* Current Temperature */}
+      <h1 className="md:text-4xl text-2xl font-bold ml-[295px] bottom-[35px] md:ml-96 relative md:bottom-[43px]">
         {live?.current?.temperature_2m} {live?.current_units?.temperature_2m}
       </h1>
-
-      {/* Displaying current date and time */}
+      
+      {/* Current date and time */}
       <h1 className="md:-mt-3 md:ml-12 -mt-4 ml-8">
         {live?.current?.time.substring(0, 10)} {live?.current?.time.substring(11, 16)}
       </h1>
-
+      
       {/* Displaying weather forecast */}
       <div className="flex justify-center flex-wrap mt-8">
         {live?.daily?.time.map((temp, index) => {
@@ -28,15 +29,15 @@ const Display = ({ live }) => {
           const unit = live?.daily_units?.temperature_2m_min;
 
           return (
-            <div key={temp} className="max-w-xs hover:bg-blue-700 bg-blue-600 shadow-lg rounded-lg overflow-hidden m-4">
-              <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2 text-white">{dayOfWeek}</div>
-                <p className="text-white text-base">Max Temperature: {maxTemp}{unit}</p>
-                <p className="text-white text-base">Min Temperature: {minTemp}{unit}</p>
-                <p className="text-white text-base">Sunset: {sunsetTime}</p>
-                <p className="text-white text-base">Sunrise: {sunriseTime}</p>
-              </div>
-            </div>
+            <WeatherCard
+              key={temp}
+              dayOfWeek={dayOfWeek}
+              maxTemp={maxTemp}
+              minTemp={minTemp}
+              sunsetTime={sunsetTime}
+              sunriseTime={sunriseTime}
+              unit={unit}
+            />
           );
         })}
       </div>
