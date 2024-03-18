@@ -28,6 +28,11 @@ const Body = () => {
         handleSearch()
        
     }, [])
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    };
   return (
     
     <div className="bg h-screen overflow-x-hidden">    
@@ -35,17 +40,18 @@ const Body = () => {
         <ul>
             <li className="font-bold ml-[25vw] m-2 md:mt-10 mt-[27px] md:ml-6 md:m-4 text-xl font-mono  text-white">Global Weather</li>
             <input 
+            onKeyUp={handleKeyPress}
     value={location} 
     onChange={(e)=> setLocation(e.target.value)} 
     className="relative bottom-0 md:mt-0 mt-12 md:bottom-10 left-8 md:left-[520px] w-1/2 rounded-lg md:w-4/6 px-4 py-2 bg-gray-100 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
     placeholder="Enter Location "
 />
-<button 
+<button
     onClick={handleSearch} 
     className="relative left-16 bottom-0 md:bottom-10 md:left-[540px] md:mt-0 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
 >
     Search
-</button>        </ul>
+</button>       </ul>
     </div> 
     <Display live={live} />  
     </div>
