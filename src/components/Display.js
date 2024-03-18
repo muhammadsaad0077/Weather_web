@@ -1,48 +1,47 @@
 import React from "react";
 
-const Display = ({ live }) => {    // Recieving live as props
-
+const Display = ({ live }) => {
   return (
-<>
-<h1 className="text-4xl font-bold h-6 ml-8 md:ml-12 mt-16 md:mt-20">{live?.timezone}</h1>   {/* Current Location */}
+    <>
+      {/* Displaying the timezone */}
+      <h1 className="text-4xl font-bold ml-8 md:ml-12 mt-16 md:mt-20">{live?.timezone}</h1>
+
+      {/* Displaying current temperature */}
       <h1 className="md:text-4xl text-3xl font-bold ml-[284px] bottom-5 md:ml-96 relative md:bottom-6">
-        {live?.current?.temperature_2m} {live?.current_units?.temperature_2m}  {/* Current Temperature */}
+        {live?.current?.temperature_2m} {live?.current_units?.temperature_2m}
       </h1>
-      <h1 className="md:-mt-3 md:ml-12 -mt-4 ml-8">  {/* Current date and time */}
-          {live?.current?.time.substring(0, 10)}{" "}
-          {live?.current?.time.substring(11, 16)}
-        </h1>
-      <div className="flex relative right-[0.8%] w-[100%] h-[100%] mt-8 md:flex-nowrap flex-wrap justify-center">
-        {live?.daily?.time.map((temp, index) => {           // destructuring
-          const sunsetTime = live?.daily?.sunset[index]?.substring(11, 16);  // sunset time
-          const sunriseTime = live?.daily?.sunrise[index]?.substring(11, 16);  // sunrise time
-          const maxTemp = live?.daily?.temperature_2m_max[index];  // max temperature
-          const minTemp = live?.daily?.temperature_2m_min[index];  // min temperature
-          const date = new Date(temp);  // converting data into day
-          const dayOfWeek = date.getDay();
-          const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-          const dayName = daysOfWeek[dayOfWeek];  // getting day according to the date
+
+      {/* Displaying current date and time */}
+      <h1 className="md:-mt-3 md:ml-12 -mt-4 ml-8">
+        {live?.current?.time.substring(0, 10)} {live?.current?.time.substring(11, 16)}
+      </h1>
+
+      {/* Displaying weather forecast */}
+      <div className="flex justify-center flex-wrap mt-8">
+        {live?.daily?.time.map((temp, index) => {
+          const sunsetTime = live?.daily?.sunset[index]?.substring(11, 16);
+          const sunriseTime = live?.daily?.sunrise[index]?.substring(11, 16);
+          const maxTemp = live?.daily?.temperature_2m_max[index];
+          const minTemp = live?.daily?.temperature_2m_min[index];
+          const date = new Date(temp);
+          const dayOfWeek = date.toLocaleString('en-US', { weekday: 'long' });
           const unit = live?.daily_units?.temperature_2m_min;
-          
+
           return (
-            <div key={temp} className="border border-black ml-6 w-[240px] h-[290px] md:mt-12 mt-20 card text-black font-bold md:text-start text-center">
-              <h1 key={temp} className="md:ml-12 ml-2">
-                {dayName}
-              </h1>   {/* displaying data on UI */}
-              <h1 key={maxTemp} className="mt-8">Max Temperature: {maxTemp}{unit}</h1>
-              <h1 key={minTemp} className="mt-8">Min Temperature: {minTemp}{unit}</h1>
-              <h1 key={sunriseTime} className="mt-8 ml-1">Sunset: {sunsetTime}</h1>
-              <h1 key={sunsetTime} className="mt-8 ml-1">Sunrise: {sunriseTime}</h1>
+            <div key={temp} className="max-w-xs hover:bg-blue-700 bg-blue-600 shadow-lg rounded-lg overflow-hidden m-4">
+              <div className="px-6 py-4">
+                <div className="font-bold text-xl mb-2 text-white">{dayOfWeek}</div>
+                <p className="text-white text-base">Max Temperature: {maxTemp}{unit}</p>
+                <p className="text-white text-base">Min Temperature: {minTemp}{unit}</p>
+                <p className="text-white text-base">Sunset: {sunsetTime}</p>
+                <p className="text-white text-base">Sunrise: {sunriseTime}</p>
+              </div>
             </div>
           );
         })}
-     
-    </div>
+      </div>
     </>
   );
 };
 
-export default Display
-  //  live?.daily?.temperature_2m_max.map((temp)
-
-
+export default Display;
