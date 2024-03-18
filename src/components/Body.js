@@ -30,7 +30,7 @@ const Body = () => {
     }, [])
   return (
     
-    <div className="bg h-screen overflow-x-hidden overflow-y-hidden">    
+    <div className="bg h-screen overflow-x-hidden">    
     <div className="flex">
         <ul>
             <li className="font-bold ml-[25vw] m-2 md:mt-10 mt-[27px] md:ml-6 md:m-4 text-xl font-mono  text-white">Global Weather</li>

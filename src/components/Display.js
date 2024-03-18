@@ -7,7 +7,7 @@ const Display = ({ live }) => {
       <h1 className="text-4xl font-bold ml-8 md:ml-12 mt-16 md:mt-20">{live?.timezone}</h1>
 
       {/* Displaying current temperature */}
-      <h1 className="md:text-4xl text-3xl font-bold ml-[284px] bottom-5 md:ml-96 relative md:bottom-6">
+      <h1 className="md:text-4xl text-3xl font-bold ml-[283px] bottom-11 md:ml-96 relative">
         {live?.current?.temperature_2m} {live?.current_units?.temperature_2m}
       </h1>
 
