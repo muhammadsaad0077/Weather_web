@@ -1,6 +1,7 @@
 import React from "react";
 import WeatherCard from "./WeatherCard";
 
+
 const Display = ({ live }) => {
   return (
     <>
@@ -29,6 +30,8 @@ const Display = ({ live }) => {
           const unit = live?.daily_units?.temperature_2m_min;
 
           return (
+            
+                
             <WeatherCard
               key={temp}
               dayOfWeek={dayOfWeek}
@@ -38,7 +41,10 @@ const Display = ({ live }) => {
               sunriseTime={sunriseTime}
               unit={unit}
             />
-          );
+           )
+          
+            
+          ;
         })}
       </div>
     </>

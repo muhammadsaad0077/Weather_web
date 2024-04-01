@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Display from './Display'
-
+import Shimmer from './Shimmer';
 const Body = () => {
     const [live, setLive] = useState([])  // For storing json
     const [location, setLocation] = useState("Pakistan");
-
+    console.log(live);
     const handleSearch = async () => {   
         
             const url = `https://nominatim.openstreetmap.org/search?format=json&q=${location}`;  // passing entered location name 
@@ -32,13 +32,14 @@ const Body = () => {
         if (e.key === 'Enter') {
             handleSearch();
         }
-    };
+    }
+    
   return (
     
     <div className="bg h-screen overflow-x-hidden">    
     <div className="flex">
         <ul>
-            <li className="font-bold ml-[25vw] m-2 md:mt-10 mt-[27px] md:ml-6 md:m-4 text-xl font-mono  text-white">Global Weather</li>
+            <li className="font-bold ml-[25vw] m-2 md:mt-10 mt-[27px] md:ml-6 md:m-4 text-xl font-mono  text-blue-500">Global Weather</li>
             <input 
             onKeyUp={handleKeyPress}
     value={location} 
@@ -53,7 +54,8 @@ const Body = () => {
     Search
 </button>       </ul>
     </div> 
-    <Display live={live} />  
+    {live.length === 0 ? <Shimmer />:  <Display live={live} />}
+    
     </div>
     
   )
